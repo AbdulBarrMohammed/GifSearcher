@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Gif Searcher</title>
+  <style>
+    h2 {
+        font-family: Arial, Helvetica, sans-serif;
+    }
+
+    body {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+    }
+    input {
+        padding: 10px;
+        font-size: 15px;
+    }
+    button {
+        border: 1px solid black;
+        background-color: white;
+        padding: 20px;
+        font-family: Arial, Helvetica, sans-serif;
+        color: black;
+    }
+  </style>
+</head>
+<body>
+  <h2>Gif Seacher</h2>
+  <input placeholder="Search for Gif">
+  <button>Search</button>
+  <img src="#">
+  <script>
+
+const searchBtn = document.querySelector('button');
+const img = document.querySelector('img');
+
+searchBtn.addEventListener('click', function(e) {
+    const input = document.querySelector('input').value;
+
+    fetch(`https://api.giphy.com/v1/gifs/translate?api_key=rrAAwVAJfX62F4wVHfEzPMc1Ys6XjebO&s=${input}`, {mode: 'cors'})
+        .then(function(response) {
+            return response.json();
+        })
+        .then(function(response) {
+            img.src = response.data.images.original.url;
+        })
+        .catch(function(error) {
+            console.log('ERRORRRR');
+            console.log(error);
+        });
+});
+
+  </script>
+</body>
+</html>
